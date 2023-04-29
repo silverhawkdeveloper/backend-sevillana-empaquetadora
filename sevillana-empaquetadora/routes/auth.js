@@ -9,8 +9,9 @@ router.get("/publico", (req, res) => res.send("Endpoint público"));
 
 //Endpoint autenticado para todo usuario registrado
 router.post("/autenticado", (req, res, next) => {
-  const { email, contrasenia } = req.body;
-  if (!email || !contrasenia) return res.sendStatus(400);
+  const email = JSON.parse(req.body).email;
+  const contrasenia = JSON.parse(req.body).contrasenia;
+  if (!email || !contrasenia) return res.status(400).send('Sin datos');
   try {
     usuario.findOne({ email: email }, function (error, usuarioInfo) {
       if (error) res.status(500).send('Error del servidor en el usuario');
