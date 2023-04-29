@@ -33,7 +33,7 @@ addErrors(ajv, { keepErrors: false });
 const validate = ajv.compile(LoginDTOSchema);
 
 const validateLoginDTO = (req, res, next) => {
-  const isDTOValid = validate(req.body);
+  const isDTOValid = validate(JSON.parse(req.body));
   if (!isDTOValid)
     return res
       .status(400)

@@ -8,7 +8,8 @@ const { connection } = mongoose;
 
 //Login con email y contrasenia
 router.post("/login", validateLogin, (req, res, next) => {
-  const { email, contrasenia } = req.body;
+  const email = JSON.parse(req.body).email;
+  const contrasenia = JSON.parse(req.body).contrasenia;
   try {
     usuario.findOne({ email: email }, function (error, usuarioInfo) {
       if (error) res.status(500).send('Error del servidor en el usuario');
