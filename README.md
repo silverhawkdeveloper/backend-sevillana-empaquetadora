@@ -24,3 +24,6 @@ Seleccionar el empaquetado mas optimo de un pedido.
 
 ## Estructura del Proyecto
 
+
+## Lanzar
+npm run dev
