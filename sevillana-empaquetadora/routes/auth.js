@@ -9,6 +9,7 @@ router.get("/publico", (req, res) => res.send("Endpoint público"));
 
 //Endpoint autenticado para todo usuario registrado
 router.post("/autenticado", (req, res, next) => {
+  //const { email, contrasenia } = req.body;
   const email = JSON.parse(req.body).email;
   const contrasenia = JSON.parse(req.body).contrasenia;
   if (!email || !contrasenia) return res.status(400).send('Sin datos');
@@ -36,7 +37,9 @@ router.post("/autenticado", (req, res, next) => {
 
 //Endpoint autorizado a administradores
 router.post("/autorizado", (req, res, next) => {
-  const { email, contrasenia } = req.body;
+  //const { email, contrasenia } = req.body;
+  const email = JSON.parse(req.body).email;
+  const contrasenia = JSON.parse(req.body).contrasenia;
   if (!email || !contrasenia) return res.status(400);
   try {
     usuario.findOne({ email: email }, function (error, usuarioInfo) {
@@ -49,7 +52,7 @@ router.post("/autorizado", (req, res, next) => {
           //Contraseña
           if (isMatch) {
             if (usuarioInfo.role !== "admin") {
-              res.status(401).send(`Usuario ${usuarioInfo.nombre} no administrador`);
+              res.status(401).send(`admin`);
             } else {
               return res.send(`Usuario ${usuarioInfo.nombre} administrador `);
             }
