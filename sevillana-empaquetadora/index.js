@@ -1,6 +1,7 @@
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
+import cors from "cors";
 import mongoose from 'mongoose';
 import authRouter from "./routes/auth.js";
 import authTokenRouter from "./routes/auth_token.js";
@@ -19,6 +20,7 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true })
 const { connection } = mongoose;
 
 const expressApp = express();
+expressApp.use(cors());
 
 expressApp.use(cookieParser());
 expressApp.use(express.json());
