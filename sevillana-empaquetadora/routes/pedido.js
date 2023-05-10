@@ -46,9 +46,9 @@ router.get('/:id', function(req, res, next) {
 
 // GET - Listado de pedidos
 router.get('/', function (req, res, next) {
-  pedido.find().populate('usuario', { 'email': 1, "_id": 0 })
-    .populate('caja', { 'descripcion': 1, "_id": 0 })
-    .populate('producto', { 'descripcion': 1, "_id": 0 })
+  pedido.find().populate('usuario', { 'email': 1, "_id": 1 })
+    .populate('caja', { 'descripcion': 1, "_id": 1 })
+    .populate('producto', { 'descripcion': 1, "_id": 1 })
     .exec(function (error, pedidoInfo) {
       if (error) res.status(500).send(error);
       else res.status(200).json(pedidoInfo);
