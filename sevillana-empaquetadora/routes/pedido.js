@@ -21,13 +21,21 @@ router.delete('/delete', function (req, res, next) {
 });
 
 // PUT - Actualizar un pedido identificado por su _id
+router.put('/update/:id', function (req, res) {
+  pedido.findByIdAndUpdate({ '_id': req.params.id }, req.body, function (error) {
+    if (error) res.status(500).send(error);
+    else res.sendStatus(200);
+  });
+});
+/*
+// PUT - Actualizar un pedido identificado por su _id
 router.put('/update', function (req, res, next) {
   pedido.findByIdAndUpdate(req.body._id, req.body, function (error) {
     if (error) res.status(500).send(error);
     else res.sendStatus(200);
   });
 });
-/*
+
 // GET - Listar un pedido por su _id
 router.get('/mostrar', function (req, res, next) {
   pedido.findById(req.body._id, function (error, pedidoInfo) {
@@ -40,7 +48,7 @@ router.get('/mostrar', function (req, res, next) {
 router.get('/:id', function(req, res, next) {
   pedido.find({ '_id': req.params.id }, function(error, pedidoInfo) {
       if (error) res.status(500).send(error);
-      else res.status(200).json(pedidoInfo);
+      else res.status(200).json(pedidoInfo);;
   });
 });
 
