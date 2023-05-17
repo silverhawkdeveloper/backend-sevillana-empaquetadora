@@ -5,16 +5,24 @@ import mongoose from 'mongoose';
 const { connection } = mongoose;
 
 // POST - Crear un nuevo pedido
-router.post('/', function (req, res, next) {
-  pedido.create(req.body, function (error, pedidoInfo) {
+router.post('/', function (req, res) {
+  pedido.create(req.body, function (error) {
     if (error) res.status(500).send(error);
     else res.sendStatus(200);
   });
 });
-
+/*
 // DELETE - Eliminar un pedido identificado por su _id
 router.delete('/delete', function (req, res, next) {
   pedido.findByIdAndDelete(req.body._id, function (error, pedidoInfo) {
+    if (error) res.status(500).send(error);
+    else res.sendStatus(200);
+  });
+});
+*/
+// DELETE - Eliminar un pedido identificado por su _id
+router.delete('/delete/:id', function (req, res) {
+  pedido.findByIdAndDelete({ '_id': req.params.id }, function (error) {
     if (error) res.status(500).send(error);
     else res.sendStatus(200);
   });

@@ -28,8 +28,8 @@ router.put('/update', function (req, res, next) {
   });
 });
 
-// GET - Listar un usuario por su _id
-router.get('/mostrar', function (req, res, next) {
+// POST- Listar un usuario por su _id
+router.post('/mostrar', function (req, res, next) {
   usuario.findById(req.body._id, function (error, usuarioInfo) {
     if (error) res.status(500).send(error);
     else res.status(200).json(usuarioInfo);

@@ -28,8 +28,8 @@ router.put('/update', function (req, res, next) {
   });
 });
 
-// GET - Listar un producto por su _id
-router.get('/mostrar', function (req, res, next) {
+// POST - Listar un producto por su _id
+router.post('/mostrar', function (req, res, next) {
   producto.findById(req.body._id, function (error, productoInfo) {
     if (error) res.status(500).send(error);
     else res.status(200).json(productoInfo);
@@ -37,11 +37,19 @@ router.get('/mostrar', function (req, res, next) {
 });
 
 // GET - Listado de productos
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     producto.find().exec(function (error, productoInfo) {
       if (error) res.status(500).send(error);
       else res.status(200).json(productoInfo);
     });
+});
+
+// GET - Listar un único productos por su _id
+router.get('/:id', function(req, res) {
+  producto.find({ '_id': req.params.id }, function(error, pedidoInfo) {
+      if (error) res.status(500).send(error);
+      else res.status(200).json(pedidoInfo);;
+  });
 });
 
 export default router;
