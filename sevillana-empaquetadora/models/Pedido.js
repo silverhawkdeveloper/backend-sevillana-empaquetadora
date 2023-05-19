@@ -15,6 +15,7 @@ const pedidoSchema = new _Schema({
         ref: 'Caja',
         default: null
     }],
+    numero_cajas: { type: Number, required: true },
     producto: [{
         type: _Schema.ObjectId,
         ref: 'Producto',
