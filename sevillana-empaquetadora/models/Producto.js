@@ -4,8 +4,8 @@ const { Schema: _Schema, connection } = mongoose;
 const productoSchema = new _Schema({
     tipo: {
         type: String,
-        enum: ['Ortoedro', 'Cubo', 'Cilindro', 'Esfera'],
-        default: 'Cubo'
+        enum: ['Cubo', 'Ortoedro', 'Cilindro', 'Esfera'],
+        required: true
     },
     descripcion: { type: String, required: true },
     arista: { type: Number },
