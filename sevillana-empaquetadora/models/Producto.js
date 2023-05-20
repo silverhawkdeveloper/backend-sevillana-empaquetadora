@@ -8,9 +8,11 @@ const productoSchema = new _Schema({
         default: 'Cubo'
     },
     descripcion: { type: String, required: true },
-    alto: { type: Number, required: true },
-    ancho: { type: Number, required: true },
-    profundo: { type: Number, required: true }
+    arista: { type: Number },
+    alto: { type: Number },
+    ancho: { type: Number },
+    profundo: { type: Number },
+    circunferencia: { type: Number }
 });
 
 export default connection.model('Producto', productoSchema);

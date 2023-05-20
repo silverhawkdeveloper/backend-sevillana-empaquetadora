@@ -21,13 +21,21 @@ router.delete('/delete', function (req, res, next) {
 });
 
 // PUT - Actualizar un producto identificado por su _id
+router.put('/update/:id', function (req, res) {
+  producto.findByIdAndUpdate({ '_id': req.params.id }, req.body, function (error) {
+    if (error) res.status(500).send(error);
+    else res.sendStatus(200);
+  });
+});
+/*
+// PUT - Actualizar un producto identificado por su _id
 router.put('/update', function (req, res, next) {
   producto.findByIdAndUpdate(req.body._id, req.body, function (error) {
     if (error) res.status(500).send(error);
     else res.sendStatus(200);
   });
 });
-
+*/
 // POST - Listar un producto por su _id
 router.post('/mostrar', function (req, res, next) {
   producto.findById(req.body._id, function (error, productoInfo) {
