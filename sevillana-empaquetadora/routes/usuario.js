@@ -13,26 +13,26 @@ router.post('/', function (req, res, next) {
 });
 
 // DELETE - Eliminar un usuario identificado por su _id
-router.delete('/delete', function (req, res, next) {
-  usuario.findByIdAndDelete(req.body._id, function (error, usuarioInfo) {
+router.delete('/delete/:id', function (req, res) {
+  usuario.findByIdAndDelete({ '_id': req.params.id }, function (error) {
     if (error) res.status(500).send(error);
     else res.sendStatus(200);
   });
 });
 
-// PUT - Actualizar un usuario identificado por su _id
-router.put('/update', function (req, res, next) {
-  usuario.findByIdAndUpdate(req.body._id, req.body, function (error) {
+// PUT - Actualizar una usuario identificado por su _id
+router.put('/update/:id', function (req, res) {
+  usuario.findByIdAndUpdate({ '_id': req.params.id }, req.body, function (error) {
     if (error) res.status(500).send(error);
     else res.sendStatus(200);
   });
 });
 
-// POST- Listar un usuario por su _id
-router.post('/mostrar', function (req, res, next) {
-  usuario.findById(req.body._id, function (error, usuarioInfo) {
-    if (error) res.status(500).send(error);
-    else res.status(200).json(usuarioInfo);
+// GET - Listar un único usuario por su _id
+router.get('/:id', function(req, res) {
+  usuario.findById({ '_id': req.params.id }, function(error, usuarioInfo) {
+      if (error) res.status(500).send(error);
+      else res.status(200).json(usuarioInfo);;
   });
 });
 
