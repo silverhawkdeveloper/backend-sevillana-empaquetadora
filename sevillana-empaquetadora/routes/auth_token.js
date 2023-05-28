@@ -8,9 +8,9 @@ const { connection } = mongoose;
 
 //Login con email y contrasenia
 router.post("/login", validateLogin, (req, res, next) => {
-  //const { email, contrasenia } = req.body;
-  const email = JSON.parse(req.body).email;
-  const contrasenia = JSON.parse(req.body).contrasenia;
+  const { email, contrasenia } = req.body;
+  //const email = JSON.parse(req.body).email;
+  //const contrasenia = JSON.parse(req.body).contrasenia;
   try {
     usuario.findOne({ email: email }, function (error, usuarioInfo) {
       if (error) res.status(500).send('Error del servidor en el usuario');
@@ -32,13 +32,13 @@ router.post("/login", validateLogin, (req, res, next) => {
               .sign(encoder.encode(process.env.JWT_PRIVATE_KEY));
             return res.send({ jwt });
           } else {
-            res.status(401).send('La contraseña no coincide');
+            return res.status(401).send('La contraseña no coincide');
           }
         });
-      } else res.status(401).send('Usuario no registrado');
+      } else return res.status(402).send('Usuario no registrado');
     });
   } catch (err) {
-    return res.sendStatus(401);
+    return res.sendStatus(403);
   }
 });
 
