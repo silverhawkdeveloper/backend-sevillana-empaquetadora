@@ -28,7 +28,7 @@ router.put('/update/:id', function (req, res) {
   });
 });
 
-// GET - Listar un único productos por su _id
+// GET - Listar una única caja por su _id
 router.get('/:id', function(req, res) {
   caja.findById({ '_id': req.params.id }, function(error, cajaInfo) {
       if (error) res.status(500).send(error);
