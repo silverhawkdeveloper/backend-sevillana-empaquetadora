@@ -15,7 +15,7 @@ router.post("/login", validateLogin, (req, res, next) => {
     usuario.findOne({ email: email }, function (error, usuarioInfo) {
       if (error) res.status(500).send('Error del servidor en el usuario');
       // Usuario
-      if (usuarioInfo != null) { 
+      if (usuarioInfo != null) {
         usuarioInfo.comparePassword(contrasenia, async function (error, isMatch) {
           if (error)
             return next(error);

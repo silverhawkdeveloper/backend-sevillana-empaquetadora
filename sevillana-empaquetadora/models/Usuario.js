@@ -6,8 +6,8 @@ const SALT_WORK_FACTOR = 10;
 const usuarioSchema = new _Schema({
     role: {
         type: String,
-        enum: ['admin', 'user'],
-        default: 'user'
+        enum: ['admin', 'usuario'],
+        default: 'usuario'
     },
     nombre: { type: String, required: true },
     telefono: { type: Number, required: true },
@@ -15,19 +15,19 @@ const usuarioSchema = new _Schema({
     contrasenia: { type: String, required: true }
 });
 
-// Contraseña
-usuarioSchema.pre('save', function (next) {
-    var user = this;
-    // solo aplica una función hash a la contrasenia si ha sido modificado (o es nuevo)
-    if (!user.isModified('contrasenia')) return next();
+//Para la encriptación del contrasenia
+usuarioSchema.pre('save', function(next) {
+    const usuario = this;
+    // solo aplica una función hash al contrasenia si ha sido modificado (o es nuevo)
+    if (!usuario.isModified('contrasenia')) return next();
     // genera la salt
-    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next(err);
-        // aplica una función hash a la contrasenia usando la nueva salt
-        bcrypt.hash(user.contrasenia, salt, function (err, hash) {
+        // aplica una función hash al contrasenia usando la nueva salt
+        bcrypt.hash(usuario.contrasenia, salt, function(err, hash) {
             if (err) return next(err);
-            // sobrescribe la contrasenia escrito con el “hasheado”
-            user.contrasenia = hash;
+            // sobrescribe el contrasenia escrito con el “hasheado”
+            usuario.contrasenia = hash;
             next();
         });
     });
