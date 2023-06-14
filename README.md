@@ -23,7 +23,11 @@ Por un lado el aumento de la productividad del empleado a la hora de realizar un
 Seleccionar el empaquetado mas optimo de un pedido.
 
 ## Estructura del Proyecto
-
+- /sevillana-empaquetadora: Directorio principal que contiene el código fuente del proyecto.
+    - /dto: Verificación del formato correcto.
+    - /models: Modelos de las colecciones.
+    - /routes: Definición de las rutas de la API rest.
+- /docs: Directorio que alberga la documentación del proyecto.
 
 ## Lanzar
 npm run dev
